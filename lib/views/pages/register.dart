@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/authentication.dart';
+import 'package:frontend/views/pages/login.dart';
 import 'package:get/get.dart';
 
 class Register extends StatefulWidget {
@@ -142,7 +143,8 @@ class _RegisterState extends State<Register> {
                                                     .trim(),
                                                 password: _passwordController
                                                     .text
-                                                    .trim());
+                                                    .trim(),
+                                                context: context);
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.lightBlue,
@@ -165,7 +167,12 @@ class _RegisterState extends State<Register> {
                           SizedBox(
                             width: double.infinity,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Login()));
+                              },
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 12), // Padding

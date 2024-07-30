@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/authentication.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -8,12 +10,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
-  final _motDePasseController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authenticationController = Get.put(AuthenticationController());
 
   @override
   void dispose() {
     _emailController.dispose();
-    _motDePasseController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -88,7 +91,7 @@ class _LoginState extends State<Login> {
                                 height: 40,
                                 width: 300,
                                 child: TextField(
-                                  controller: _motDePasseController,
+                                  controller: _passwordController,
                                   decoration: InputDecoration(
                                       label: const Text('Mot de passe'),
                                       border: InputBorder.none,
@@ -105,7 +108,12 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             width: 300,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await _authenticationController.login(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                    context: context);
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.lightBlue,
                                 shape: const RoundedRectangleBorder(
@@ -113,13 +121,20 @@ class _LoginState extends State<Login> {
                                       BorderRadius.zero, // Coins non arrondis
                                 ),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 3, vertical: 8),
-                                child: Text(
-                                  'Se Connecter',
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                child: Obx(() {
+                                  return _authenticationController
+                                          .isLoading.value
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : const Text(
+                                          'Se Connecter',
+                                          style: TextStyle(color: Colors.white),
+                                        );
+                                }),
                               ),
                             ),
                           ),
