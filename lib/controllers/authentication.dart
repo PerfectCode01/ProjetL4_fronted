@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/constants.dart';
+import 'package:frontend/views/pages/base.dart';
 import 'package:frontend/views/pages/home.dart';
 import 'package:frontend/views/pages/present1.dart';
 import 'package:get/get.dart';
@@ -88,7 +89,7 @@ class AuthenticationController extends GetxController {
           debugPrint('Enregistrement réussi: ${response.body}');
           token.value = json.decode(response.body)['token'];
           box.write('token', token.value);
-          Get.offAll(() => const Home());
+          Get.offAll(() => const Base());
         } else {
           debugPrint('Erreur lors de l\'enregistrement: ${response.body}');
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

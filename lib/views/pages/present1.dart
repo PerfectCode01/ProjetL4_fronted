@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/pages/home.dart';
+import 'package:frontend/views/pages/base.dart';
+// import 'package:frontend/views/pages/home.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Present1 extends StatefulWidget {
@@ -58,7 +59,7 @@ class _Present1State extends State<Present1> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Home()));
+                                    builder: (context) => const Base()));
                           }
                         });
                       },
