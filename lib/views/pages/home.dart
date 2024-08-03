@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/widget/Carousel.dart';
-import 'package:frontend/views/widget/typeQuiz.dart';
+import 'package:frontend/views/widget/type_quiz.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -143,7 +143,7 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(10),
                 child: ListView(
                   children: [
-                    Text('Decouvez nos Categories populaires',
+                    Text('Decouvez les options disponibles',
                         style: GoogleFonts.lobster(
                           fontSize: 20,
                           color: Colors.blue[900],
@@ -157,7 +157,19 @@ class _HomeState extends State<Home> {
                           fontSize: 12, color: Colors.grey[500]),
                     ),
                     const SizedBox(height: 25),
-                    const Carousel(),
+                    const Carousel(
+                      categories: [
+                        {
+                          "img": "bg",
+                          "titre": "Scientifique",
+                          "desc":
+                              "L'enseignement des sciences encourage le développement de compétences analytiques, "
+                        },
+                        {"img": "bg", "titre": "Pedagogie générale"},
+                        {"img": "bg", "titre": "Commerciale"},
+                        {"img": "bg", "titre": "Electricité"},
+                      ],
+                    ),
                   ],
                 ),
               ),
